@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function fetchDeputados() {
     const response = await axios.get('https://dadosabertos.camara.leg.br/api/v2/deputados');
-    const votosResponse = await axios.get('https://firebasestorage.googleapis.com/v0/b/escala6x1votos.firebasestorage.app/o/votos.json?alt=media');
+    const votosResponse = await axios.get('https://us-central1-escala6x1votos.cloudfunctions.net/getVotos');
     
     // Supondo que o votosResponse.data.dados é a lista de votos conforme o JSON fornecido
     const votos = votosResponse.data.dados;
