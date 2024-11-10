@@ -48,15 +48,15 @@ h1 {
 }
 
 .voto-sim {
-    background-color: #4CAF50; /* Verde para voto Sim */
+    background-color: #4CAF50;
 }
 
 .voto-nao {
-    background-color: #F44336; /* Vermelho para voto Não */
+    background-color: #F44336;
 }
 
 .voto-ausente {
-    background-color: #ddd; /* Cinza claro para ausente */
+    background-color: #ddd; 
     color: #333;
     opacity: 0.7;
 }

@@ -1,78 +1,69 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const deputadosContainer = document.getElementById("deputados-container");
-    const searchInput = document.getElementById("search-input");
-    const voteFilter = document.getElementById("vote-filter");
+document.addEventListener('DOMContentLoaded', async () => {
+    const deputadosContainer = document.getElementById('deputados-container');
+    const searchInput = document.getElementById('search-input');
+    const voteFilter = document.getElementById('vote-filter');
 
-    let deputadosData = [];
-    let votosData = [];
+    const deputados = await fetchDeputados();
 
-    // Carrega os deputados da API
-    async function loadDeputados() {
-        try {
-            const response = await axios.get('https://dadosabertos.camara.leg.br/api/v2/deputados');
-            deputadosData = response.data.dados;
-            // Após carregar os deputados, carrega os votos
-            await loadVotos();
-        } catch (error) {
-            console.error("Erro ao carregar os deputados:", error);
-        }
-    }
+    function renderDeputados(filteredDeputados) {
+        deputadosContainer.innerHTML = '';
+        filteredDeputados.forEach(deputado => {
+            const deputadoCard = document.createElement('div');
+            deputadoCard.classList.add('deputado-card');
 
-    // Carrega os votos do arquivo votos.json
-    async function loadVotos() {
-        try {
-            const response = await fetch('votos.json');
-            const data = await response.json();
-            votosData = data.dados;
-            renderDeputados(deputadosData, votosData);
-        } catch (error) {
-            console.error("Erro ao carregar o arquivo votos.json:", error);
-        }
-    }
+            if (deputado.voto === 'Sim') {
+                deputadoCard.classList.add('voto-sim');
+            } else if (deputado.voto === 'Não') {
+                deputadoCard.classList.add('voto-nao');
+            } else {
+                deputadoCard.classList.add('voto-ausente');
+            }
 
-    function renderDeputados(deputados, votos) {
-        deputadosContainer.innerHTML = "";
-        
-        // Para cada deputado, associe os votos
-        deputados.forEach(deputado => {
-            // Encontre o voto correspondente ao deputado
-            const voto = votos.find(v => v.deputado_.id === deputado.id);
-            const tipoVoto = voto ? voto.tipoVoto : "Não votou"; // Se não houver voto, exibe "Não votou"
-            const deputadoDiv = document.createElement("div");
-            deputadoDiv.className = "deputado-card";
-            deputadoDiv.style.border = tipoVoto === "Sim" ? "4px solid green" : tipoVoto === "Não" ? "4px solid red" : "4px solid gray";
-            deputadoDiv.innerHTML = `
-                <img src="${deputado.urlFoto}" alt="${deputado.nome}" class="deputado-foto">
+            deputadoCard.innerHTML = `
+                <img src="${deputado.urlFoto}" alt="Foto de ${deputado.nome}">
                 <h2>${deputado.nome}</h2>
-                <p>Partido: ${deputado.siglaPartido} - ${deputado.siglaUf}</p>
-                <p>Voto: ${tipoVoto}</p>
+                <p>${deputado.siglaPartido}</p>
+                <p>${deputado.voto ? `Votou: ${deputado.voto}` : 'Ausente'}</p>
             `;
-            deputadosContainer.appendChild(deputadoDiv);
+
+            deputadosContainer.appendChild(deputadoCard);
         });
     }
-
-    // Filtro por nome e tipo de voto
-    searchInput.addEventListener("input", () => filterDeputados());
-    voteFilter.addEventListener("change", () => filterDeputados());
 
     function filterDeputados() {
-        const searchTerm = searchInput.value.toLowerCase();
+        const searchText = searchInput.value.toLowerCase();
         const voteType = voteFilter.value;
-        const filteredDeputados = deputadosData.filter((deputado) => {
-            const matchesName = deputado.nome.toLowerCase().includes(searchTerm);
-            return matchesName;
-        });
-        const filteredVotos = votosData.filter((voto) => {
-            return voteType === "" || voto.tipoVoto === voteType;
+
+        const filteredDeputados = deputados.filter(deputado => {
+            const matchesName = deputado.nome.toLowerCase().includes(searchText);
+            const matchesVote = voteType ? deputado.voto === voteType : true;
+            return matchesName && matchesVote;
         });
 
-        const filteredData = filteredDeputados.filter(deputado => {
-            return filteredVotos.some(voto => voto.deputado_.id === deputado.id);
-        });
-
-        renderDeputados(filteredData, filteredVotos);
+        renderDeputados(filteredDeputados);
     }
 
-    // Carrega os deputados ao iniciar
-    loadDeputados();
+    searchInput.addEventListener('input', filterDeputados);
+    voteFilter.addEventListener('change', filterDeputados);
+
+    renderDeputados(deputados);
 });
+
+async function fetchDeputados() {
+    const response = await axios.get('https://dadosabertos.camara.leg.br/api/v2/deputados');
+    const votosResponse = await axios.get('https://raw.githubusercontent.com/guilhermecugler/VotosPEC/refs/heads/main/votos.json');
+    
+    // Supondo que o votosResponse.data.dados é a lista de votos conforme o JSON fornecido
+    const votos = votosResponse.data.dados;
+
+    return response.data.dados.map(deputado => {
+        const votoInfo = votos.find(voto => voto.deputado_.id === deputado.id);
+        return {
+            id: deputado.id,
+            nome: deputado.nome,
+            siglaPartido: deputado.siglaPartido,
+            urlFoto: deputado.urlFoto,
+            voto: votoInfo ? votoInfo.tipoVoto : 'Ausente'
+        };
+    });
+}
