@@ -1,0 +1,38 @@
+{
+    "dados": [
+        {
+            "tipoVoto": "Não",
+            "deputado_": {
+              "id": 69871,
+              "uri": "https://dadosabertos.camara.leg.br/api/v2/deputados/69871",
+              "nome": "Bacelar",
+              "siglaPartido": "PV",
+              "uriPartido": "https://dadosabertos.camara.leg.br/api/v2/partidos/36851",
+              "siglaUf": "BA",
+              "idLegislatura": 57,
+              "urlFoto": "https://www.camara.leg.br/internet/deputado/bandep/69871.jpg",
+              "email": "dep.bacelar@camara.leg.br"
+            }
+          },
+          {
+            "tipoVoto": "Não",
+            "deputado_": {
+              "id": 74270,
+              "uri": "https://dadosabertos.camara.leg.br/api/v2/deputados/74270",
+              "nome": "Gilberto Nascimento",
+              "siglaPartido": "PSD",
+              "uriPartido": "https://dadosabertos.camara.leg.br/api/v2/partidos/36834",
+              "siglaUf": "SP",
+              "idLegislatura": 57,
+              "urlFoto": "https://www.camara.leg.br/internet/deputado/bandep/74270.jpg",
+              "email": "dep.gilbertonascimento@camara.leg.br"
+            }
+          }
+    ],
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://dadosabertos.camara.leg.br/api/v2/votacoes/2466104-52/votos"
+      }
+    ]
+  }

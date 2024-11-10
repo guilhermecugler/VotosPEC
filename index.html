@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação dos Deputados - PEC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Votação dos Deputados - PEC X</h1>
+        <div class="filter-container">
+            <input type="text" id="search-input" placeholder="Buscar deputado pelo nome">
+            <select id="vote-filter">
+                <option value="">Todos os votos</option>
+                <option value="Sim">Votaram Sim</option>
+                <option value="Não">Votaram Não</option>
+                <option value="Ausente">Ausentes</option>
+            </select>
+        </div>
+        <div id="deputados-container" class="deputados-grid"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
