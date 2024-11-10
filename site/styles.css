@@ -1,80 +1,118 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
 }
 
 .container {
     max-width: 1200px;
-    padding: 20px;
+    margin: 0 auto;
     text-align: center;
 }
 
 h1 {
+    font-size: 2.5em;
     color: #333;
     margin-bottom: 20px;
 }
 
-.deputados-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+.credits {
+    font-size: 1.2em;
+    color: #007bff;
+    margin-top: 10px;
 }
 
-.deputado-card {
-    border: 2px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    width: 200px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-    color: #fff;
+.credits a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
 }
 
-.deputado-card img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    border: 3px solid #fff;
+.credits a:hover {
+    color: #0056b3;
 }
 
-.deputado-card h2 {
-    font-size: 1.1em;
-    margin: 10px 0;
-}
-
-.voto-sim {
-    background-color: #4CAF50;
-}
-
-.voto-nao {
-    background-color: #F44336;
-}
-
-.voto-ausente {
-    background-color: #ddd; 
-    color: #333;
-    opacity: 0.7;
-}
-
-@media (max-width: 768px) {
-    .deputado-card {
-        width: 100%;
-    }
-}
-
+/* Estilo do filtro */
 .filter-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 15px;
+    margin: 20px 0;
 }
 
-#search-input, #vote-filter {
-    padding: 8px;
-    font-size: 16px;
+.input-search, .input-select {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 250px;
+}
+
+.input-search:focus, .input-select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Grid de deputados */
+.deputados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.deputado-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deputado-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.deputado-card img {
+    width: 100%;
+    max-width: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.deputado-card h2 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.deputado-card p {
+    margin: 5px 0;
+}
+
+/* Estilo das cores dos votos */
+.voto-sim {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border-left: 5px solid #218838;
+}
+
+.voto-nao {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    border-left: 5px solid #c82333;
+}
+
+.voto-ausente {
+    background-color: #ffc107; /* Amarelo */
+    color: black;
+    border-left: 5px solid #e0a800;
 }

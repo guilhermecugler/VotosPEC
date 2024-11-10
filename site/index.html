@@ -8,16 +8,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>Votação dos Deputados - PEC X</h1>
+        <h1>Votação dos Deputados - PEC Escala 6x1</h1>
+        
+        <!-- Créditos com estilo -->
+        <p class="credits"><a href="https://github.com/guilhermecugler" target="_blank">Desenvolvido por Guilherme Cugler</a></p>
+
         <div class="filter-container">
-            <input type="text" id="search-input" placeholder="Buscar deputado pelo nome">
-            <select id="vote-filter">
+            <input type="text" id="search-input" placeholder="Buscar deputado pelo nome" class="input-search">
+            <select id="vote-filter" class="input-select">
                 <option value="">Todos os votos</option>
                 <option value="Sim">Votaram Sim</option>
                 <option value="Não">Votaram Não</option>
                 <option value="Ausente">Ausentes</option>
             </select>
         </div>
+
         <div id="deputados-container" class="deputados-grid"></div>
     </div>
 
