@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function fetchDeputados() {
     const response = await axios.get('https://dadosabertos.camara.leg.br/api/v2/deputados');
-    const votosResponse = await axios.get('https://raw.githubusercontent.com/guilhermecugler/VotosPEC/refs/heads/main/votos.json');
+    const votosResponse = await axios.get('https://raw.githubusercontent.com/guilhermecugler/VotosPEC/refs/heads/main/site/votos.json');
     
     // Supondo que o votosResponse.data.dados é a lista de votos conforme o JSON fornecido
     const votos = votosResponse.data.dados;
