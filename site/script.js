@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else if (deputado.voto === 'Não') {
                 deputadoCard.classList.add('voto-nao');
             } else {
-                deputadoCard.classList.add('voto-ausente');
+                deputadoCard.classList.add('voto-nao');
             }
 
             deputadoCard.innerHTML = `
                 <img src="${deputado.urlFoto}" alt="Foto de ${deputado.nome}">
                 <h2>${deputado.nome}</h2>
                 <p>${deputado.siglaPartido}</p>
-                <p>${deputado.voto ? `Votou: ${deputado.voto}` : 'Ausente'}</p>
+                <p>${deputado.voto ? `Assinou: ${deputado.voto}` : 'Não'}</p>
             `;
 
             deputadosContainer.appendChild(deputadoCard);
@@ -63,7 +63,7 @@ async function fetchDeputados() {
             nome: deputado.nome,
             siglaPartido: deputado.siglaPartido,
             urlFoto: deputado.urlFoto,
-            voto: votoInfo ? votoInfo.tipoVoto : 'Ausente'
+            voto: votoInfo ? votoInfo.tipoVoto : 'Não'
         };
     });
 }
