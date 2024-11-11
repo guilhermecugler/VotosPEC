@@ -1291,7 +1291,15 @@
           {
             "tipoVoto": "Sim",
             "deputado_": {
-              
+              "id": 178887,
+              "uri": "https://dadosabertos.camara.leg.br/api/v2/deputados/178887",
+              "nome": "Rubens Pereira Júnior",
+              "siglaPartido": "PT",
+              "uriPartido": "https://dadosabertos.camara.leg.br/api/v2/partidos/36844",
+              "siglaUf": "MA",
+              "idLegislatura": 57,
+              "urlFoto": "https://www.camara.leg.br/internet/deputado/bandep/178887.jpg",
+              "email": "dep.rubenspereirajunior@camara.leg.br"
             }
           }
     ],

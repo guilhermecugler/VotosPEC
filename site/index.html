@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votação dos Deputados - PEC</title>
-        <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQPZQZVVYN"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-QQPZQZVVYN');
     </script>
     <link rel="stylesheet" href="styles.css">
@@ -19,8 +17,9 @@
     <div class="container">
         <h1>Assinatura dos Deputados - PEC Escala 6x1</h1>
         
-        <!-- Créditos com estilo -->
         <p class="credits"><a href="https://github.com/guilhermecugler" target="_blank">Desenvolvido por Guilherme Cugler</a></p>
+        
+        <div id="vote-count" class="vote-count"></div> <!-- Contador de votos -->
 
         <div class="filter-container">
             <input type="text" id="search-input" placeholder="Buscar deputado pelo nome" class="input-search">
@@ -28,10 +27,15 @@
                 <option value="">Todos os votos</option>
                 <option value="Sim">Assinou</option>
                 <option value="Não">Não assinou</option>
-                <!-- <option value="Ausente">Ausentes</option> -->
+            </select>
+            <select id="group-filter" class="input-select">
+                <option value="">Sem Agrupamento</option>
+                <option value="partido">Agrupar por Partido</option>
+                <option value="estado">Agrupar por Estado</option>
             </select>
         </div>
 
+        <div id="stats-container" class="stats-container"></div>
         <div id="deputados-container" class="deputados-grid"></div>
     </div>
 
